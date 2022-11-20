@@ -1,2 +1,17 @@
 
 a5c34b35a5fe40c38e698e3beb7d7d9f
+
+# Criar uma interface
+ng g interface pasta/nomeDoArquivo
+
+# Criar um guard
+ng g guard pasta/nomeDoArquivo
+
+# Criar um component
+ng g component pasta/nomeDoArquivo
+
+# Criar um module
+ng g module pasta/nomeDoArquivo
+
+# Criar uma routing
+ng g m pasta/nomeDoArquivo --routing
