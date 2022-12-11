@@ -15,3 +15,13 @@ ng g module pasta/nomeDoArquivo
 
 # Criar uma routing
 ng g m pasta/nomeDoArquivo --routing
+
+
+
+#intalação dos pacotes de ícones
+npm i @fortawesome/angular-fontawesome
+npm i @fortawesome/fontawesome-svg-core
+npm i @fortawesome/free-solid-svg-icons
+
+Para essa versão do angular (14), precisei instalar uma versão menor do fontawesome:
+ng add @fortawesome/angular-fontawesome@0.10.x
