@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 import { SpotifyConfiguration } from 'src/environments/environment';
 import Spotify from 'spotify-web-api-js';
-import { TitleStrategy } from '@angular/router';
 import { IUsuario } from '../interfaces/iusuario';
-import { SpotifyUserParaUsuario } from '../Common/spotifyHelper';
+import { IPlaylist } from '../interfaces/IPlaylist';
+import { SpotifyPlaylistParaPlaylist, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +40,8 @@ export class SpotifyService {
    }
 
    async obterSpotifyUser() {
-    console.log(await this.spotifyApi.getMe());
+    // console.log(await this.spotifyApi.getMe());
     const userInfo = await this.spotifyApi.getMe();
-    console.log('hue');
     // console.log(userInfo);
     this.usuario = SpotifyUserParaUsuario(userInfo);
    }
@@ -65,6 +66,16 @@ export class SpotifyService {
   definirAccessToken(token: string) {
     this.spotifyApi.setAccessToken(token);
     localStorage.setItem('token', token);
+  }
+
+  async buscarPlaylistUsuario(offset = 0, limit = 50): Promise<IPlaylist[]> {
+    
+    const playlists = await this.spotifyApi.getUserPlaylists(this.usuario.id, {offset, limit});
+    //return playlists.items.map(x => SpotifyPlaylistParaPlaylist(x));
+    console.group(playlists);
+    //Carrega as playlists
+    return playlists.items.map(SpotifyPlaylistParaPlaylist); //Simplificado
+    
   }
 
 }
